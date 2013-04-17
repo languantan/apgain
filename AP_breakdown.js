@@ -1,4 +1,5 @@
 // ==UserScript==
+// @id		   apgain@languantan
 // @name       Total AP Gain
 // @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.js
 // @version    0.1
