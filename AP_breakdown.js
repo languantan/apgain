@@ -22,19 +22,19 @@ function apGain() {
     
     // use own namespace for plugin
     window.plugin.apgain = function() {};
-       
+    
     window.plugin.apgain.display = function(playername){
         
-            
-    var total = 0;
-    var resos_destroyed = 0;
-    var links_destroyed = 0;
-    var fields_destroyed = 0;
-    var resos_deployed = 0;
-    var captured = 0;
-    var completed = 0;
-    var links = 0;
-    var fields = 0;
+        
+        var total = 0;
+        var resos_destroyed = 0;
+        var links_destroyed = 0;
+        var fields_destroyed = 0;
+        var resos_deployed = 0;
+        var captured = 0;
+        var completed = 0;
+        var links = 0;
+        var fields = 0;
         
         $.each(chat._public.data, 
                function(guid, hello)
@@ -75,10 +75,26 @@ function apGain() {
     }
     
     var setup =  function() {
-        $('#sidebar').append('<input id="showAP" placeholder="Player\'s name" type="text"/>');
-        $("#showAP").keypress(function(e) {
-            if((e.keyCode ? e.keyCode : e.which) != 13) return;
-            window.plugin.apgain.display($(this).val());
+        $('#sidebar').append('<input id="showAP" placeholder="agent\'s codename" type="text"/>');
+        $('#showAP').keydown(function(event) {
+            var el = $('#chatinput input');
+            el.val($(this).val());
+            try {
+                var kc = (event.keyCode ? event.keyCode : event.which);
+                if(kc === 13) { // enter
+                    window.plugin.apgain.display($(this).val());
+                    event.preventDefault();
+                } else if (kc === 9) { // tab
+                    event.preventDefault();
+                    window.chat.handleTabCompletion();
+                    var codename = el.val().substring(1).trim();
+                    $(this).val(codename);
+                    el.val('');
+                }
+            } catch(error) {
+                console.log(error);
+                debug.printStackTrace();
+            }
         });
     }
     
