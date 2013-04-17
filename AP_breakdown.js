@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name       Total AP Gain
-// @namespace  http://github/
+// @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.js
 // @version    0.1
 // @description    Calculate AP gain for a single player
 // @include        http://www.ingress.com/intel*
