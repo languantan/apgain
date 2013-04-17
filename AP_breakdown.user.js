@@ -75,7 +75,7 @@ function apGain() {
     }
     
     var setup =  function() {
-        $('#sidebar').append('<input id="showAP" placeholder="Player\'s name" type="text"/>');
+        $('#sidebar').append('<input id="showAP" placeholder="agent\'s codename" type="text"/>');
         $("#showAP").keypress(function(e) {
             if((e.keyCode ? e.keyCode : e.which) != 13) return;
             window.plugin.apgain.display($(this).val());
