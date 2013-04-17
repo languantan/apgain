@@ -13,6 +13,7 @@ how to use
 2)Type the codename of the agent you want to calculate AP gain for in the sidebar
 3)Press Enter and Voila!
 
--changes
+changes
+======
 Version 0.1
 Only calculates currently loaded actions in "full" chat.
