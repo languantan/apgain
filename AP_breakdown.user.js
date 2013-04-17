@@ -76,7 +76,6 @@ function apGain() {
     
     var setup =  function() {
         $('#sidebar').append('<input id="showAP" placeholder="agent\'s codename" type="text"/>');
-<<<<<<< HEAD:AP_breakdown.js
         $('#showAP').keydown(function(event) {
             var el = $('#chatinput input');
             el.val($(this).val());
@@ -96,11 +95,7 @@ function apGain() {
                 console.log(error);
                 debug.printStackTrace();
             }
-=======
-        $("#showAP").keypress(function(e) {
-            if((e.keyCode ? e.keyCode : e.which) != 13) return;
-            window.plugin.apgain.display($(this).val());
->>>>>>> c3cf2b42305f6a655d3953d3be433a590c2766aa:AP_breakdown.user.js
+
         });
     }
     
