@@ -3,6 +3,8 @@
 // @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.js
 // @version    0.1
 // @description    Calculate AP gain for a single player
+// @updateURL      https://raw.github.com/languantan/apgain/master/AP_breakdown.js
+// @downloadURL    https://raw.github.com/languantan/apgain/master/AP_breakdown.js
 // @include        http://www.ingress.com/intel*
 // @include        https://www.ingress.com/intel*
 // @match          http://www.ingress.com/intel*
