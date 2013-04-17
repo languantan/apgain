@@ -4,7 +4,7 @@ calculate AP gain by codename for ingress
 
 pre-requisites
 ======
-IITC installed
+IITC installed (https://secure.jonatkins.com/iitc/release/total-conversion-build.user.js)
 
 how to use
 ======
