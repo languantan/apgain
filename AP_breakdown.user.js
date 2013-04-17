@@ -2,7 +2,7 @@
 // @id    	   apgain@languantan
 // @name       Total AP Gain
 // @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.js
-// @version    0.2
+// @version    0.2.1
 // @description    Calculate AP gain for a single player
 // @updateURL      https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
 // @downloadURL    https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
@@ -35,13 +35,16 @@ function apGain() {
         var completed = 0;
         var links = 0;
         var fields = 0;
+        var playerColor = "grey";
+        var guid = playerNameToGuid(playername);
         
         $.each(chat._public.data, 
-               function(guid, hello)
+               function(num, hello)
                { 
                    var line = hello[2];
-                   if(line.indexOf(playername) != -1)
+                   if(hello[3] == guid)
                    {
+                       if(playerColor=="grey"){var pos = line.indexOf("color:")+6; playerColor = line.substring(pos,pos+7); console.log(playerColor);}
                        if(line.indexOf("destroyed an")!= -1) { total+=DESTROY_RESONATOR; resos_destroyed++; }
                        if(line.indexOf("destroyed the")!= -1) { total+=DESTROY_LINK; links_destroyed++; }
                        if(line.indexOf("destroyed a Control Field")!= -1) { total+=DESTROY_FIELD; fields_destroyed++; }
@@ -52,8 +55,8 @@ function apGain() {
                    }
                });
         
-        var tblResult = $('<table style="margin-left:auto;margin-right:auto;width:500px;"/>');
-        tblResult.append($('<tr style="font-size:20px;color:#20A8B1"><th colspan="3"><center><b>Total AP Gained</b></center></th></tr>'));
+        var tblResult = $('<table style="margin-left:auto;margin-right:auto;width:500px;" />');
+        tblResult.append($('<tr style="font-size:20px;color:#20A8B1"><th colspan="3"><h1 style="text-align:center;color:' + playerColor + '">' + playername + '</h1><center><b>Total AP Gained</b></center></th></tr>'));
         tblResult.append($('<tr style="text-align:center;font-weight:bold;color:#FFCE00;"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px">Action</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px"># of Actions</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px">AP Gained</td></tr>'));
         tblResult.append($('<tr style="text-align:center;color: ' +COLORS[2]+ ';"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px"><b>Destruction AP</b></td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px"></td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px"></td></tr>'));
         tblResult.append($('<tr style="text-align:center;color:#FFCE00"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px">Destroy a Resonator</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px">' + resos_destroyed + '</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px">' + resos_destroyed*DESTROY_RESONATOR + '</td></tr>'));
@@ -63,10 +66,10 @@ function apGain() {
         tblResult.append($('<tr style="text-align:center;color: ' +COLORS[1]+ ';"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px"><b>Creation AP</b></td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px"></td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px"></td></tr>'));
         tblResult.append($('<tr style="text-align:center;color:#FFCE00;"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px">Deploy a Resonator</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px">' + resos_deployed + '</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px">' + resos_deployed*DEPLOY_RESONATOR + '</td></tr>'));
         tblResult.append($('<tr style="text-align:center;color:#FFCE00;"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px">Captured a Portal</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px">' + captured + '</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px">' + captured*500 + '</td></tr>'));
-        tblResult.append($('<tr style="text-align:center;color:#FFCE00;"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px">Created a Link</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px">' + links + '</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px">' + links*187 + '</td></tr>'));
+        tblResult.append($('<tr style="text-align:center;color:#FFCE00;"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px">Created a Link</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px">' + links + '</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px">' + links*313 + '</td></tr>'));
         tblResult.append($('<tr style="text-align:center;color:#FFCE00;"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 0px 0px">Created a Control Field</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 0px 1px">' + fields + '</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 0px 1px">' + fields*1250 + '</td></tr>'));
         
-        tblResult.append($('<tr style="font-size:20px; color:#20A8B1;"><th colspan="3">Total: ' + total + '</td></tr>'));
+        tblResult.append($('<tr style="font-size:20px; color:#20A8B1;"><th colspan="3">Total: ' + total + '</th></tr>'));
         $(".ui-draggable").css({'position':'absolute','top':'100px','left':'400px','min-width':'600px'});
         $('#dialog').css({'min-width':'550px'});
         
@@ -75,8 +78,8 @@ function apGain() {
     }
     
     var setup =  function() {
-        $('#sidebar').append('<input id="showAP" placeholder="agent\'s codename" type="text"/>');
-        $('#showAP').keydown(function(event) {
+        $('#sidebar').append('<input id="showAP" placeholder="agent\'s codename" type="text"/>'); //add input textbox
+        $('#showAP').keydown(function(event) { //autocomplete function
             try {
                 var kc = (event.keyCode ? event.keyCode : event.which);
                 if(kc === 13) { // enter
@@ -87,9 +90,12 @@ function apGain() {
                     var el = $('#chatinput input');
                     el.val($(this).val());
                     window.chat.handleTabCompletion();
-                    var codename = el.val().substring(1).trim();
-                    $(this).val(codename);
+                    if (el.val().startsWith("@")){
+                        var codename = el.val().substring(1).trim();
+                        $(this).val(codename);
+                    }
                     el.val('');
+                    $(this).val('');
                 }
             } catch(error) {
                 console.log(error);
