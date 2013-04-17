@@ -1,7 +1,7 @@
 // ==UserScript==
-// @id		   apgain@languantan
+// @id    	   apgain@languantan
 // @name       Total AP Gain
-// @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
+// @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.js
 // @version    0.2
 // @description    Calculate AP gain for a single player
 // @updateURL      https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
@@ -77,15 +77,15 @@ function apGain() {
     var setup =  function() {
         $('#sidebar').append('<input id="showAP" placeholder="agent\'s codename" type="text"/>');
         $('#showAP').keydown(function(event) {
-            var el = $('#chatinput input');
-            el.val($(this).val());
             try {
                 var kc = (event.keyCode ? event.keyCode : event.which);
                 if(kc === 13) { // enter
-                    window.plugin.apgain.display($(this).val());
                     event.preventDefault();
+                    window.plugin.apgain.display($(this).val());
                 } else if (kc === 9) { // tab
                     event.preventDefault();
+                    var el = $('#chatinput input');
+                    el.val($(this).val());
                     window.chat.handleTabCompletion();
                     var codename = el.val().substring(1).trim();
                     $(this).val(codename);
@@ -95,7 +95,7 @@ function apGain() {
                 console.log(error);
                 debug.printStackTrace();
             }
-
+            
         });
     }
     
