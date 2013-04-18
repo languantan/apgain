@@ -16,5 +16,15 @@ how to use
 
 changes
 ======
+Version 0.2.2
+===
+added display of agent's codename in dialog
+used guid to improve search time
+
+Version 0.2
+===
+added support for IITC's autocomplete of agent's codename
+
 Version 0.1
-Only calculates currently loaded actions in "full" chat.
+===
+calculates currently loaded actions in "full" chat.
