@@ -2,7 +2,7 @@
 // @id    	   apgain@languantan
 // @name       Total AP Gain
 // @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.js
-// @version    0.2.1
+// @version    0.2.2
 // @description    Calculate AP gain for a single player
 // @updateURL      https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
 // @downloadURL    https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
@@ -85,6 +85,7 @@ function apGain() {
                 if(kc === 13) { // enter
                     event.preventDefault();
                     window.plugin.apgain.display($(this).val());
+                    $(this).val('');
                 } else if (kc === 9) { // tab
                     event.preventDefault();
                     var el = $('#chatinput input');
@@ -95,7 +96,6 @@ function apGain() {
                         $(this).val(codename);
                     }
                     el.val('');
-                    $(this).val('');
                 }
             } catch(error) {
                 console.log(error);
