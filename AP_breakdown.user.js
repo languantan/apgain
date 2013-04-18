@@ -35,23 +35,28 @@ function apGain() {
         var completed = 0;
         var links = 0;
         var fields = 0;
-        var playerColor = "grey";
+        var playerColor = "null";
         var guid = playerNameToGuid(playername);
         
         $.each(chat._public.data, 
                function(num, hello)
                { 
-                   var line = hello[2];
-                   if(hello[3] == guid)
+                   if(hello[3] == guid) //checks agent's guid against guid of Actions data
                    {
-                       if(playerColor=="grey"){var pos = line.indexOf("color:")+6; playerColor = line.substring(pos,pos+7); console.log(playerColor);}
-                       if(line.indexOf("destroyed an")!= -1) { total+=DESTROY_RESONATOR; resos_destroyed++; }
-                       if(line.indexOf("destroyed the")!= -1) { total+=DESTROY_LINK; links_destroyed++; }
-                       if(line.indexOf("destroyed a Control Field")!= -1) { total+=DESTROY_FIELD; fields_destroyed++; }
-                       if(line.indexOf("deployed an")!= -1) { total+=DEPLOY_RESONATOR; resos_deployed++; }
-                       if(line.indexOf("captured")!= -1) { total+=CAPTURE_PORTAL; captured++;completed++; }
-                       if(line.indexOf("linked")!= -1) { total+=313; links++; }
-                       if(line.indexOf("created a")!= -1) { total+=1250; fields++; }
+                       var line = hello[2]; 
+                       if(playerColor=="null"){ //find agent's color from color attribute
+                           var pos = line.indexOf("color:")+6;
+                           var end = line.indexOf("\"",pos);
+                           playerColor = line.substring(pos,end);
+                           console.log(playerColor);
+                           }
+                       if(line.indexOf("destroyed an")!= -1) { total+=DESTROY_RESONATOR; resos_destroyed++; return;}
+                       if(line.indexOf("destroyed the")!= -1) { total+=DESTROY_LINK; links_destroyed++; return;}
+                       if(line.indexOf("destroyed a Control Field")!= -1) { total+=DESTROY_FIELD; fields_destroyed++; return;}
+                       if(line.indexOf("deployed an")!= -1) { total+=DEPLOY_RESONATOR; resos_deployed++; return;}
+                       if(line.indexOf("captured")!= -1) { total+=CAPTURE_PORTAL; captured++;completed++; return;}
+                       if(line.indexOf("linked")!= -1) { total+=313; links++; return;}
+                       if(line.indexOf("created a")!= -1) { total+=1250; fields++; return;}
                    }
                });
         
@@ -78,15 +83,15 @@ function apGain() {
     }
     
     var setup =  function() {
-        $('#sidebar').append('<input id="showAP" placeholder="agent\'s codename" type="text"/>'); //add input textbox
-        $('#showAP').keydown(function(event) { //autocomplete function
+        $('#sidebar').append('<input id="showAP" placeholder="agent\'s codename" type="text"/>');
+        $('#showAP').keydown(function(event) {
             try {
                 var kc = (event.keyCode ? event.keyCode : event.which);
                 if(kc === 13) { // enter
                     event.preventDefault();
                     window.plugin.apgain.display($(this).val());
                     $(this).val('');
-                } else if (kc === 9) { // tab
+                } else if (kc === 9) { // tab: for autocomplete, uses IITC autocomplete function
                     event.preventDefault();
                     var el = $('#chatinput input');
                     el.val($(this).val());
