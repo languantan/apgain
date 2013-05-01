@@ -10,7 +10,7 @@
 // @include        https://www.ingress.com/intel*
 // @match          http://www.ingress.com/intel*
 // @match          https://www.ingress.com/intel*
-// @copyright  2013, languan
+// @copyright  2013, languan aka tentwosix
 // ==/UserScript==
 
 function apGain() {
