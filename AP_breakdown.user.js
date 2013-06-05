@@ -1,8 +1,8 @@
 // ==UserScript==
-// @id    	   apgain@languantan
+// @id           apgain@languantan
 // @name       Total AP Gain
-// @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.js
-// @version    0.2.2
+// @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
+// @version    0.2.3
 // @description    Calculate AP gain for a single player
 // @updateURL      https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
 // @downloadURL    https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
@@ -61,7 +61,7 @@ function apGain() {
                });
         
         var tblResult = $('<table style="margin-left:auto;margin-right:auto;width:500px;" />');
-        tblResult.append($('<tr style="font-size:20px;color:#20A8B1"><th colspan="3"><h1 style="text-align:center;color:' + playerColor + '">' + playername + '</h1><center><b>Total AP Gained</b></center></th></tr>'));
+        tblResult.append($('<tr style="font-size:20px;color:#20A8B1"><th colspan="3"><h1 style="text-align:center;color:' + playerColor + '">' + playername + '</h1></th></tr>'));
         tblResult.append($('<tr style="text-align:center;font-weight:bold;color:#FFCE00;"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px">Action</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px"># of Actions</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px">AP Gained</td></tr>'));
         tblResult.append($('<tr style="text-align:center;color: ' +COLORS[2]+ ';"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px"><b>Destruction AP</b></td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px"></td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px"></td></tr>'));
         tblResult.append($('<tr style="text-align:center;color:#FFCE00"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 0px">Destroy a Resonator</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 1px 1px">' + resos_destroyed + '</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 1px 1px">' + resos_destroyed*DESTROY_RESONATOR + '</td></tr>'));
@@ -75,14 +75,21 @@ function apGain() {
         tblResult.append($('<tr style="text-align:center;color:#FFCE00;"><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 0px 0px">Created a Control Field</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 1px 0px 1px">' + fields + '</td><td style="border-color:#FFCE00;border-style:solid;border-width:0px 0px 0px 1px">' + fields*1250 + '</td></tr>'));
         
         tblResult.append($('<tr style="font-size:20px; color:#20A8B1;"><th colspan="3">Total: ' + total + '</th></tr>'));
-        $(".ui-draggable").css({'position':'absolute','top':'100px','left':'400px','min-width':'600px'});
-        $('#dialog').css({'min-width':'550px'});
+        //$(".ui-dialog-apgain").css({'position':'absolute','top':'100px','left':'400px','min-width':'600px'});
+        //$('#dialog').css({'min-width':'550px'});
         
-        alert(tblResult, true);
+        dialog({
+            title: 'Total AP Gained',
+            dialogClass: 'ui-dialog-apgain',
+            html: tblResult,
+        });
+        
+        
         
     }
     
     var setup =  function() {
+        $('head').append('<style> .ui-dialog-apgain {max-width: 800px !important; width: auto !important;}</style>');
         $('#sidebar').append('<input id="showAP" placeholder="agent\'s codename" type="text"/>');
         $('#showAP').keydown(function(event) {
             try {
