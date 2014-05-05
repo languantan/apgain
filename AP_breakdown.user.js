@@ -2,7 +2,7 @@
 // @id           apgain@languantan
 // @name       Total AP Gain
 // @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
-// @version    0.2.3
+// @version    0.2.4
 // @description    Calculate AP gain for a single player
 // @updateURL      https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
 // @downloadURL    https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
@@ -36,12 +36,11 @@ function apGain() {
         var links = 0;
         var fields = 0;
         var playerColor = "null";
-        var guid = playerNameToGuid(playername);
         
         $.each(chat._public.data, 
                function(num, hello)
                { 
-                   if(hello[3] == guid) //checks agent's guid against guid of Actions data
+                   if(hello[3] == playername) //checks agent's guid against guid of Actions data
                    {
                        var line = hello[2]; 
                        if(playerColor=="null"){ //find agent's color from color attribute
