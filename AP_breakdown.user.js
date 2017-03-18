@@ -2,7 +2,7 @@
 // @id           apgain@languantan
 // @name       Total AP Gain
 // @namespace  https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
-// @version    0.2.4
+// @version    0.2.5
 // @description    Calculate AP gain for a single player
 // @updateURL      https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
 // @downloadURL    https://raw.github.com/languantan/apgain/master/AP_breakdown.user.js
