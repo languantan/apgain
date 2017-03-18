@@ -86,7 +86,11 @@ function apGain() {
 
     var setup =  function() {
         $('head').append('<style> .ui-dialog-apgain {max-width: 800px !important; width: auto !important;}</style>');
-        $('#sidebar').append('<input id="showAP" placeholder="key in agent\'s codename to get AP Gain" type="text"/>');
+        var container = $('<div style="display:flex">');
+        container.append($('<a style="margin:5px">Total AP Gain for: </a>'));
+        container.append($('<input id="showAP" placeholder="agent\'s codename" type="text" style="flex: 1">'));
+        $('#sidebar').append(container);
+        
         $('#showAP').keydown(function(event) {
             try {
                 var kc = (event.keyCode ? event.keyCode : event.which);
