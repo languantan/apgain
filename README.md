@@ -10,6 +10,8 @@ how to use
 ======
 1) Download plugin [here](https://github.com/languantan/apgain/raw/master/AP_breakdown.user.js)
 
+1) Scroll up in the ***all*** chat, until you see all the recent actions of the agent you want to calculate for.
+
 1) Type the codename of the agent you want to calculate AP gain for in the sidebar.
 it should look like this:
 ![Preview](https://github.com/languantan/apgain/blob/master/lookandfeel.png?raw=true)
